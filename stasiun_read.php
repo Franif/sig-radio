@@ -45,13 +45,13 @@
 	      </thead>
 	      <tbody>
 		<?php 
-		  $query = $db->query("SELECT * FROM lokasi_baru
-		  LEFT JOIN kota ON lokasi_baru.id_kota = kota.id
-		  LEFT JOIN kecamatan ON lokasi_baru.id_kecamatan = kecamatan.id
-		  LEFT JOIN klien ON lokasi_baru.id_klien = klien.id
-		  LEFT JOIN ikon ON lokasi_baru.id_ikon_marker = ikon.id
-		  LEFT JOIN servis ON lokasi_baru.id_servis = servis.id
-		  LEFT JOIN subservis ON lokasi_baru.id_subservis = subservis.id
+		  $query = $db->query("SELECT * FROM lokasi AS l
+		  LEFT JOIN kecamatan AS kec ON l.id_kecamatan = kec.id
+		  LEFT JOIN kota ON kec.id_kota = kota.id
+		  LEFT JOIN klien ON l.id_klien = klien.id
+		  LEFT JOIN ikon ON l.id_ikon_marker = ikon.id
+		  LEFT JOIN servis ON l.id_servis = servis.id
+		  LEFT JOIN subservis ON l.id_subservis = subservis.id
 		   ");
 		  $no = 1;
 		  while ($row = $query->fetch_assoc()) {

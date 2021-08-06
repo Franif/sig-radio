@@ -31,7 +31,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="index.html" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -211,7 +211,7 @@
 	    <li class="nav-header">OLAH DATA</li>
             <li class="nav-item">
               <a href="stasiun_read.php" class="nav-link active">
-                <i class="nav-icon fas fa-location-arrow"></i>
+                <i class="nav-icon fas fa-building"></i>
                 <p>
                   Stasiun
                   <!-- <i class="right fas fa-angle-left"></i> -->
@@ -220,7 +220,7 @@
             </li>
             <li class="nav-item">
               <a href="pengukuran_read.php" class="nav-link">
-                <i class="nav-icon fas fa-location-arrow"></i>
+                <i class="nav-icon fas fa-ruler"></i>
                 <p>
                   Pengukuran
                   <!-- <i class="right fas fa-angle-left"></i> -->
@@ -229,7 +229,7 @@
             </li>
             <li class="nav-item">
               <a href="profile_read.php" class="nav-link">
-                <i class="nav-icon fas fa-location-arrow"></i>
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                   Profile
                 </p>

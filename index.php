@@ -1,15 +1,17 @@
 <?php include('header.php') ?>
 <?php
-  $query_i = $db->query("SELECT l.id, l.nama_stasiun, l.alamat, l.telepon FROM lokasi_baru AS l");
+  $query_i = $db->query("SELECT l.id, l.nama_stasiun, l.alamat, l.telepon FROM lokasi AS l");
   if(isset($_GET['kota'])){
-    $query_m = $db->query("SELECT lokasi_baru.nama_stasiun, lokasi_baru.latitude, lokasi_baru.longitude, ikon.path 
-      FROM lokasi_baru 
-      JOIN ikon ON lokasi_baru.id_ikon_marker = ikon.id
-      WHERE lokasi_baru.id_kota = ".$_GET['kota']."");
+    $query_m = $db->query("SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
+      FROM lokasi AS l
+      JOIN ikon ON l.id_ikon_marker = ikon.id
+      JOIN kecamatan ON l.id_kecamatan = kecamatan.id
+      JOIN kota ON kecamatan.id_kota = kota.id
+      WHERE kota.id = ".$_GET['kota']."");
   }else{  
-    $query_m = $db->query("SELECT lokasi_baru.nama_stasiun, lokasi_baru.latitude, lokasi_baru.longitude, ikon.path 
-      FROM lokasi_baru 
-      JOIN ikon ON lokasi_baru.id_ikon_marker = ikon.id");
+    $query_m = $db->query("SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
+      FROM lokasi AS l
+      JOIN ikon ON l.id_ikon_marker = ikon.id");
   }
 ?>
   <div class="content-wrapper">
@@ -130,7 +132,7 @@
                                     [
                                       '<div class="info-content">' +
                                       '<h3><?php echo $row['nama_stasiun'] ?></h3>' +
-                                      '<p><?php echo $row['alamat'] ?></p>' +
+                                      '<h4><?php echo $row['alamat'] ?></h4>' +
                                       '<p><?php echo $row['telepon'] ?></p>' +
                                       '</div>'
                                     ],
@@ -159,8 +161,8 @@
                           }
                         }
                       </script>
-                    <div id="world-map-markers" style="height: 400px; overflow: hidden">
-                      <div id="googleMap" style="width:100%;height:400px;color:#000000"></div>
+                    <div id="world-map-markers" style="height: 500px; overflow: hidden">
+                      <div id="googleMap" style="width:100%;height:500px;color:#000000"></div>
                     </div>
                   </div>
                 </div>
