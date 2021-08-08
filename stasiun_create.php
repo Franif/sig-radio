@@ -70,7 +70,42 @@
                   </div>
                   <div class="form-group">
                     <label for="frekuensi">Frekuensi</label>
-                    <input type="text" name="frekuensi" class="form-control">
+                    <div class="input-group">
+                      <input type="text" name="frekuensi" class="form-control">
+                      <div class="input-group-append">
+                        <span class="input-group-text">Mhz</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="servis">Servis</label>
+                    <select name ="servis" id="servis" class="form-control" >
+                      <option value="" hidden selected>---Pilih Service---</option>
+                    <?php $query = $db->query("SELECT * FROM servis"); ?>
+                    <?php while($row = $query->fetch_assoc()): ?>
+                      <option value="<?php echo $row['id']; ?>" ><?php echo $row['servis']; ?></option>
+                    <?php endwhile; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="subservis">Sub Service</label>
+                    <select name ="subservis" id="subservis" class="form-control" >
+                      <option value="" hidden selected>---Pilih Sub Service---</option>
+                    <?php $query = $db->query("SELECT * FROM subservis"); ?>
+                    <?php while($row = $query->fetch_assoc()): ?>
+                      <option value="<?php echo $row['id']; ?>" ><?php echo $row['subservis']; ?></option>
+                    <?php endwhile; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="klien">Nama Klien</label>
+                    <select name ="klien" id="klien" class="form-control" >
+                      <option value="" hidden selected>---Pilih Klien---</option>
+                    <?php $query = $db->query("SELECT * FROM klien"); ?>
+                    <?php while($row = $query->fetch_assoc()): ?>
+                      <option value="<?php echo $row['id']; ?>" ><?php echo $row['nama_klien']; ?></option>
+                    <?php endwhile; ?>
+                    </select>
                   </div>
                 </div>
                 <!-- /.card-body -->
