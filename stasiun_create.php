@@ -107,6 +107,16 @@
                     <?php endwhile; ?>
                     </select>
                   </div>
+                  <div class="form-group">
+                    <label for="ikon">Jalur Ikon</label>
+                    <select name ="ikon" id="ikon" class="form-control" >
+                      <option value="" hidden selected>---Pilih Ikon---</option>
+                    <?php $query = $db->query("SELECT * FROM ikon"); ?>
+                    <?php while($row = $query->fetch_assoc()): ?>
+                      <option value="<?php echo $row['id']; ?>" ><?php echo $row['path']; ?></option>
+                    <?php endwhile; ?>
+                    </select>
+                  </div>
                 </div>
                 <!-- /.card-body -->
 
