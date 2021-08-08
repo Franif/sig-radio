@@ -138,7 +138,7 @@
                 </p>
               </a>
             </li>
-	    <li class="nav-header">OLAH DATA</li>
+            <li class="nav-header">OLAH DATA</li>
             <li class="nav-item">
               <a href="stasiun_read.php" class="nav-link ">
                 <i class="nav-icon fas fa-building"></i>
@@ -169,5 +169,5 @@
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
-	<!-- /.sidebar -->
+    <!-- /.sidebar -->
     </aside>

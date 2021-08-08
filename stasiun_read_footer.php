@@ -32,7 +32,19 @@
   <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
   <!-- ChartJS -->
   <script src="plugins/chart.js/Chart.min.js"></script>
-
+<script>
+$('#daftar-kota').on('change', function(){
+var kota_id = this.value;
+$.ajax({
+type: "POST",
+url: "get_kecamatan.php",
+data:'kota_id='+kota_id,
+success: function(result){
+$("#daftar-kec").html(result);
+}
+});
+});
+</script>
 </body>
 </html>
 

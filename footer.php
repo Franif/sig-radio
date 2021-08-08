@@ -32,6 +32,64 @@
   <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
   <!-- ChartJS -->
   <script src="plugins/chart.js/Chart.min.js"></script>
+  <!-- Google Maps Javascript -->
+  <script text="text/javascript">
+      function initMap(){
+        // Variabel untuk menyimpan informasi lokasi
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
+        //  Variabel berisi properti tipe peta
+        var mapOptions = {
+            mapTypeId: 'satellite'
+          }; 
+        // Pembuatan peta
+        var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);      
+        // Variabel untuk menyimpan batas kordinat
+        var bounds = new google.maps.LatLngBounds(); 
+        var radios = [
+          <?php 
+            if($query_m->num_rows > 0){
+              while($row = $query_m->fetch_assoc()){
+                echo '["'.$row['nama_stasiun'].'", "'.$row['latitude'].'", "'.$row['longitude'].'", "'.$row['path'].'"],';
+              }
+            }
+          ?>];
+
+        var infoWindowContent = [
+          <?php
+            if($query_i->num_rows > 0){
+              while($row = $query_i->fetch_assoc()){ 
+          ?>
+                [
+                  '<div class="info-content">' +
+                  '<h3><?php echo $row['nama_stasiun'] ?></h3>' +
+                  '<h4><?php echo $row['alamat'] ?></h4>' +
+                  '<p><?php echo $row['telepon'] ?></p>' +
+                  '</div>'
+                ],
+          <?php
+              }
+            }
+          ?>];
+        map.setTilt(100);
+        for(i = 0; i < radios.length; i++){
+          const radio = radios[i];
+          let position = new google.maps.LatLng(radio[1], radio[2]);
+          let marker = new google.maps.Marker({
+              position: position,
+              map: map,
+              icon: radio[3],
+            });
+          google.maps.event.addListener(marker, 'click', (function(marker, i){
+              return function(){
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+              }
+            })(marker, i));
+          bounds.extend(position);
+          map.fitBounds(bounds);
+        }
+      }
+  </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9-xRbyMcTIO6RL96myTGq7wfLzaLNUtg&callback=initMap"></script>
 
   <!-- AdminLTE for demo purposes -->

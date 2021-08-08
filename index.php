@@ -103,64 +103,6 @@
                 <div class="d-md-flex">
                   <div class="p-1 flex-fill" style="overflow: hidden">
                     <!-- Map will be created here -->
-                    <script text="text/javascript">
-                        function initMap(){
-                          // Variabel untuk menyimpan informasi lokasi
-                          var infoWindow = new google.maps.InfoWindow(), marker, i;
-                          //  Variabel berisi properti tipe peta
-                          var mapOptions = {
-                              mapTypeId: 'roadmap'
-                            }; 
-                          // Pembuatan peta
-                          var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);      
-                          // Variabel untuk menyimpan batas kordinat
-                          var bounds = new google.maps.LatLngBounds(); 
-                          var markers = [
-                              <?php 
-                                if($query_m->num_rows > 0){
-                                  while($row = $query_m->fetch_assoc()){
-                                    echo '["'.$row['nama_stasiun'].'", "'.$row['latitude'].'", "'.$row['longitude'].'", "'.$row['path'].'"],';
-                                  }
-                                }
-                              ?>];
-
-                          var infoWindowContent = [
-                              <?php
-                                if($query_i->num_rows > 0){
-                                  while($row = $query_i->fetch_assoc()){ 
-                              ?>
-                                    [
-                                      '<div class="info-content">' +
-                                      '<h3><?php echo $row['nama_stasiun'] ?></h3>' +
-                                      '<h4><?php echo $row['alamat'] ?></h4>' +
-                                      '<p><?php echo $row['telepon'] ?></p>' +
-                                      '</div>'
-                                    ],
-                              <?php
-                                  }
-                                }
-                              ?>];
-                          map.setTilt(100);
-                          for(i = 0; i < markers.length; i++){
-                            let position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-                            let marker = new google.maps.Marker({
-                                position: position,
-                                map: map,
-                                icon: markers[i][3],
-                              });
-
-                            google.maps.event.addListener(marker, 'click', (function(marker, i){
-                                return function(){
-                                  infoWindow.setContent(infoWindowContent[i][0]);
-                                  infoWindow.open(map, marker);
-                                }
-                              })(marker, i));
-
-                            bounds.extend(position);
-                            map.fitBounds(bounds);
-                          }
-                        }
-                      </script>
                     <div id="world-map-markers" style="height: 500px; overflow: hidden">
                       <div id="googleMap" style="width:100%;height:500px;color:#000000"></div>
                     </div>
