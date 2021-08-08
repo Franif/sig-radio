@@ -73,7 +73,7 @@
                     <div class="input-group">
                       <input type="text" name="frekuensi" class="form-control">
                       <div class="input-group-append">
-                        <span class="input-group-text">Mhz</span>
+                        <span class="input-group-text">MHz</span>
                       </div>
                     </div>
                   </div>
@@ -101,7 +101,7 @@
                     <label for="klien">Nama Klien</label>
                     <select name ="klien" id="klien" class="form-control" >
                       <option value="" hidden selected>---Pilih Klien---</option>
-                    <?php $query = $db->query("SELECT * FROM klien"); ?>
+                    <?php $query = $db->query("SELECT * FROM klien AS kl ORDER BY kl.nama_klien ASC"); ?>
                     <?php while($row = $query->fetch_assoc()): ?>
                       <option value="<?php echo $row['id']; ?>" ><?php echo $row['nama_klien']; ?></option>
                     <?php endwhile; ?>

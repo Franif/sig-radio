@@ -1,7 +1,15 @@
 <?php include('header.php') ?>
 <?php
   $query_i = $db->query("SELECT l.id, l.nama_stasiun, l.alamat, l.telepon FROM lokasi AS l");
-  if(isset($_GET['kota'])){
+  if(isset($_GET['kota']) && isset($_GET['kec']) && isset($_GET['subservis'])){
+    $query_m = $db->query("SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
+      FROM lokasi AS l
+      JOIN ikon ON l.id_ikon_marker = ikon.id
+      JOIN kecamatan ON l.id_kecamatan = kecamatan.id
+      JOIN kota ON kecamatan.id_kota = kota.id
+      JOIN subservis ON l.id_subservis = subservis.id
+      WHERE kota.id = ".$_GET['kota']." AND kecamatan.id = ".$_GET['kec']." AND subservis.id = ".$_GET['subservis']." ");
+  }elseif(isset($_GET['kota'])){
     $query_m = $db->query("SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
       FROM lokasi AS l
       JOIN ikon ON l.id_ikon_marker = ikon.id
@@ -50,26 +58,32 @@
                   <div class="p-1 flex-fill row" style="">
                     <div class="form-group col-md-3 col-sm-6 col-12">
                       <label>Kota</label>
-                      <select name="kota" class="form-control"> 
+                      <select name="kota" id="kota" class="form-control"> 
                         <option value="" disabled selected hidden>---Pilih Kota/Kabupaten---</option>
-                      <?php $query_s = $db->query("SELECT * FROM kota"); ?>
-                      <?php if($query_s->num_rows > 0){ ?>
-                      <?php   while($row = $query_s->fetch_assoc()){ ?>
+                      <?php $query_s_k = $db->query("SELECT * FROM kota"); ?>
+                      <?php if($query_s_k->num_rows > 0): ?>
+                      <?php   while($row = $query_s_k->fetch_assoc()): ?>
                         <option value="<?php echo $row['id'] ?>" ><?php echo $row['nama_kota'] ?></option>
-                      <?php   } ?>
-                      <?php } ?>
+                      <?php   endwhile; ?>
+                      <?php endif; ?>
                       </select>
                     </div>
                     <div class="form-group col-md-3 col-sm-6 col-12">
-                      <label>Kota</label>
-                      <select name="" class="form-control">
+                      <label>Kecamatan</label>
+                      <select name="kec" id="kec" class="form-control">
                         <option value="" disabled selected hidden></option>
                       </select>
                     </div>
                     <div class="form-group col-md-3 col-sm-6 col-12">
-                      <label>Kota</label>
-                      <select name="" class="form-control">
-                        <option value="" disabled selected hidden></option>
+                      <label>Subservis</label>
+                      <select name="subservis" class="form-control">
+                        <option value="" disabled selected hidden>---Pilih Sub Service---</option>
+                      <?php $query_s_sub = $db->query("SELECT * FROM subservis"); ?>
+                      <?php if($query_s_sub->num_rows > 0): ?>
+                      <?php   while($row = $query_s_sub->fetch_assoc()): ?>
+                        <option value="<?php echo $row['id'] ?>" ><?php echo $row['subservis'] ?></option>
+                      <?php   endwhile; ?>
+                      <?php endif; ?>
                       </select>
                     </div>
                   </div>

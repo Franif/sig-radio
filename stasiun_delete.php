@@ -1,7 +1,7 @@
 <?php include('config.php');?>
 <?php
 $row=$_GET;
-$query="delete from lokasi where id='".$row['id']."'";
+$query="DELETE FROM lokasi WHERE id='".$row['id']."'";
 if($db->query($query)===TRUE){
 	echo "Koneksi berhasil"; 
 

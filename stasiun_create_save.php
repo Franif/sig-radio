@@ -9,10 +9,10 @@
             '".$post['alamat']."', 
             '".$post['telepon']."', 
             '".$post['kecamatan']."', 
-            '".$post['frekuensi']."',-
-            '".$post['servis']."',-
-            '".$post['subservis']."',-
-            '".$post['klien']."',-
+            '".$post['frekuensi']."',
+            '".$post['servis']."',
+            '".$post['subservis']."',
+            '".$post['klien']."',
             '".$post['ikon']."'
           )";
 

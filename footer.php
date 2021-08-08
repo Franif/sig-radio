@@ -18,6 +18,19 @@
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
+  <script>
+  $('#kota').on('change', function(){
+    var kota_id = this.value;
+    $.ajax({
+      type: "POST",
+      url: "get_kecamatan.php",
+      data:'kota_id='+kota_id,
+      success: function(result){
+        $("#kec").html(result);
+      }
+    });
+  });
+  </script>
   <!-- Bootstrap -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.js"></script>
   <!-- overlayScrollbars -->
