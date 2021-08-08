@@ -54,8 +54,8 @@
                   </div>
                   <div class="form-group">
                     <label for="kota">Kota</label>
-                    <select name ="kota" id="daftar-kota" class="form-control" >
-                      <option value="" hidden selected>--- ---</option>
+                    <select name ="kota" id="kota" class="form-control" >
+                      <option value="" hidden selected>---Pilih Kota/Kabupaten ---</option>
                     <?php $query_kota = $db->query("SELECT * FROM kota"); ?>
                     <?php while($row_kota = $query_kota->fetch_assoc()): ?>
                       <option value="<?php echo $row_kota['id']; ?>" ><?php echo $row_kota['nama_kota']; ?></option>
@@ -64,8 +64,8 @@
                   </div>
                   <div class="form-group">
                     <label for="kecamatan">Kecamatan</label>
-                    <select name ="kecamatan" id="daftar-kec" class="form-control">
-                      <option value="" hidden selected>--- ---</option>
+                    <select name ="kecamatan" id="kec" class="form-control">
+                      <option value="" hidden selected>---Pilih Kecamatan---</option>
                     </select>
                   </div>
                   <div class="form-group">
