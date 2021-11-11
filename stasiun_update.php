@@ -9,18 +9,18 @@ $query_kecamatan = $db->query("SELECT kec.id, kec.nama_kecamatan, k.nama_kota FR
 $query_servis = $db->query("SELECT * FROM servis");
 
 $query_subservis = $db->query("SELECT * FROM subservis");
-$query_klien = $db->query("SELECT * FROM klien AS kl ORDER BY kl.nama_klien ASC");
+$query_klien = $db->query("SELECT * FROM klien_baru AS kl ORDER BY kl.nama_klien ASC");
 $query_ikon = $db->query("SELECT * FROM ikon");
 
-$query = $db->query("SELECT l.id, l.nama_stasiun, l.latitude, l.longitude, l.alamat, l.telepon, l.id_kecamatan, kec.nama_kecamatan, kec.id_kota, k.nama_kota, l.frekuensi, l.id_servis, s.servis, l.id_subservis, sb.subservis, l.id_klien, kl.nama_klien, l.id_ikon_marker, i.path
+$query = $db->query("SELECT l.id_stasiun, l.nama_stasiun, l.latitude, l.longitude, l.alamat, l.telepon, l.id_kecamatan, kec.nama_kecamatan, kec.id_kota, k.nama_kota, l.frekuensi, l.id_servis, s.servis, l.id_subservis, sb.subservis, l.id_klien, kl.nama_klien, l.id_ikon_marker, i.path
   FROM lokasi AS l 
   LEFT JOIN kecamatan AS kec ON l.id_kecamatan = kec.id
   LEFT JOIN kota AS k ON kec.id_kota = k.id
   LEFT JOIN servis AS s ON l.id_servis = s.id
   LEFT JOIN subservis AS sb ON l.id_subservis = sb.id
-  LEFT JOIN klien AS kl ON l.id_klien = kl.id
+  LEFT JOIN klien_baru AS kl ON l.id_klien = kl.id_klien
   LEFT JOIN ikon AS i ON l.id_ikon_marker = i.id
-  WHERE l.id = '".$_GET['id']."' ");
+  WHERE l.id_stasiun = '".$_GET['id_stasiun']."' ");
 $no = 1;
 $row = $query->fetch_assoc();
 ?>
@@ -35,8 +35,8 @@ $row = $query->fetch_assoc();
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item active">Stasiun</li>
+                <li class="breadcrumb-item"><a href="stasiun_read.php">Stasiun</a></li>
+                <li class="breadcrumb-item client">Edit Stasiun</li> 
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -51,14 +51,17 @@ $row = $query->fetch_assoc();
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Tambah Lokasi<h3>
+                <h3 class="card-title">Edit Stasiun<h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form method="POST" action="stasiun_update_save.php">
                 <div class="card-body">
                   <div class="form-group">
-                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>" class="form-control" >
+                    <label for="id_stasiun">Id Stasiun</label>
+                    <input type="text" name="id_stasiun" value="<?php echo $row['id_stasiun'] ?>" class="form-control" readonly value="">
+                  </div>
+                  <div>
                     <label for="nama_stasiun">Nama Stasiun</label>
                     <input type="text" name="nama_stasiun" value="<?php echo $row['nama_stasiun'] ?>" class="form-control" autofocus>
                   </div>
@@ -143,8 +146,8 @@ $row = $query->fetch_assoc();
                     <label for="klien">Nama Klien</label>
                     <select name="klien" class="form-control">
                     <?php while($row_klien = $query_klien->fetch_assoc()): ?>
-                      <option value="<?php echo $row_klien['id'] ?>" 
-                    <?php if($row['id_klien'] ===  $row_klien['id']) : ?> 
+                      <option value="<?php echo $row_klien['id_klien'] ?>" 
+                    <?php if($row['id_klien'] ===  $row_klien['id_klien']) : ?> 
                       selected 
                     <?php endif; ?> >
                       <?php echo $row_klien['nama_klien'] ?>

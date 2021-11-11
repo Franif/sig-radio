@@ -6,10 +6,10 @@
 
     <!-- Main Footer -->
     <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+      <strong>Copyright &copy; 2021 <a href="#">BalmonBatam.co.id</a>.</strong>
       All rights reserved.
       <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.1.0
+        <b>By :</b> @PutriNurzaini
       </div>
     </footer>
   </div>
@@ -52,7 +52,7 @@
         var infoWindow = new google.maps.InfoWindow(), marker, i;
         //  Variabel berisi properti tipe peta
         var mapOptions = {
-            mapTypeId: 'satellite'
+            mapTypeId: 'roadmap'
           }; 
         // Pembuatan peta
         var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);      
@@ -73,7 +73,7 @@
               while($row = $query_i->fetch_assoc()){ 
           ?>
                 [
-                  '<div class="info-content">' +
+                  '<div class="info-content" style="">' +
                   '<h3><?php echo $row['nama_stasiun'] ?></h3>' +
                   '<h4><?php echo $row['alamat'] ?></h4>' +
                   '<p><?php echo $row['telepon'] ?></p>' +

@@ -1,8 +1,9 @@
 <?php include('config.php') ?>
 <?php 
   $post = $_POST;
-  $sql = "INSERT INTO lokasi (nama_stasiun, latitude, longitude, alamat, telepon, id_kecamatan, frekuensi, id_servis, id_subservis, id_klien, id_ikon_marker) 
+  $sql = "INSERT INTO lokasi (id_stasiun, nama_stasiun, latitude, longitude, alamat, telepon, id_kecamatan, frekuensi, id_servis, id_subservis, id_klien, id_ikon_marker) 
           VALUES (
+            '".$post['id_stasiun']."',
             '".$post['nama_stasiun']."', 
             '".$post['latitude']."', 
             '".$post['longitude']."', 

@@ -10,8 +10,9 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item active">Stasiun</li>
+                <li class="breadcrumb-item"><a href="stasiun_read.php ?>">Stasiun</a></li>
+                <li class="breadcrumb-item client">Tambah Stasiun</li>
+                
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -32,6 +33,10 @@
               <!-- form start -->
               <form method="POST" action="stasiun_create_save.php">
                 <div class="card-body">
+                  <div class="form-group">
+                    <label for="id_stasiun">Id Stasiun</label>
+                    <input type="text" name="id_stasiun" class="form-control" autofocus>
+                  </div>
                   <div class="form-group">
                     <label for="nama_stasiun">Nama Stasiun</label>
                     <input type="text" name="nama_stasiun" class="form-control" autofocus>
@@ -101,9 +106,9 @@
                     <label for="klien">Nama Klien</label>
                     <select name ="klien" id="klien" class="form-control" >
                       <option value="" hidden selected>---Pilih Klien---</option>
-                    <?php $query = $db->query("SELECT * FROM klien AS kl ORDER BY kl.nama_klien ASC"); ?>
+                    <?php $query = $db->query("SELECT * FROM klien_baru AS kl ORDER BY kl.nama_klien ASC"); ?>
                     <?php while($row = $query->fetch_assoc()): ?>
-                      <option value="<?php echo $row['id']; ?>" ><?php echo $row['nama_klien']; ?></option>
+                      <option value="<?php echo $row['id_klien']; ?>" ><?php echo $row['nama_klien']; ?></option>
                     <?php endwhile; ?>
                     </select>
                   </div>

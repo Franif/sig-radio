@@ -10,8 +10,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Stasiun</li>
+              <li class="breadcrumb-item"><a href="index.php">Stasiun</a></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -34,6 +33,7 @@
                   <thead>
                     <tr>
                       <th>No</th>
+                      <th>Id Stasiun</th>
                       <th>Nama Lokasi</th>
                       <th>Latitude</th>
                       <th>Longitude</th>
@@ -50,10 +50,10 @@
                   </thead>
                   <tbody>
                   <?php
-                    $query = $db->query("SELECT l.id, l.nama_stasiun, l.latitude, l.longitude, l.alamat, l.telepon, kec.id_kota, k.nama_kota, kec.nama_kecamatan, l.frekuensi, s.servis, sb.subservis, kl.nama_klien FROM lokasi AS l
+                    $query = $db->query("SELECT l.id_stasiun, l.nama_stasiun, l.latitude, l.longitude, l.alamat, l.telepon, kec.id_kota, k.nama_kota, kec.nama_kecamatan, l.frekuensi, s.servis, sb.subservis, kl.nama_klien FROM lokasi AS l
                       LEFT JOIN kecamatan AS kec ON l.id_kecamatan = kec.id
                       LEFT JOIN kota AS k ON kec.id_kota = k.id
-                      LEFT JOIN klien AS kl ON l.id_klien = kl.id
+                      LEFT JOIN klien_baru AS kl ON l.id_klien = kl.id_klien
                       LEFT JOIN ikon AS i ON l.id_ikon_marker = i.id
                       LEFT JOIN servis AS s ON l.id_servis = s.id
                       LEFT JOIN subservis AS sb ON l.id_subservis = sb.id
@@ -63,6 +63,7 @@
                   ?>
                     <tr>
                       <td><?php echo $no ?></td>
+                      <td><?php echo $row['id_stasiun'] ?></td>
                       <td><?php echo $row['nama_stasiun'] ?></td>
                       <td><?php echo $row['latitude'] ?></td>
                       <td><?php echo $row['longitude'] ?></td>
@@ -75,8 +76,8 @@
                       <td><?php echo $row['subservis'] ?></td>
                       <td><?php echo $row['nama_klien'] ?></td>
                       <td>
-                      <a href="stasiun_update.php?id=<?php echo $row['id'] ?>&&kota=<?php echo $row['id_kota']?>" class="btn btn-secondary btn-block">Edit</a>
-                        <a href="stasiun_delete.php?id=<?php echo $row['id'] ?>" class="btn btn-danger btn-block"><i class="fas fa-trash"></i> Hapus</a>
+                      <a href="stasiun_update.php?id_stasiun=<?php echo $row['id_stasiun'] ?>&&kota=<?php echo $row['id_kota']?>" class="btn btn-secondary btn-block">Edit</a>
+                      <a href="stasiun_delete.php?id_stasiun=<?php echo $row['id_stasiun'] ?>" onClick="return confirm('Apakah Anda benar-benar mau menghapusnya?')" class="btn btn-danger btn-block"><i class="fas fa-trash"></i> Hapus</a>
                       </td>
                     </tr>
                   <?php

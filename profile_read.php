@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tabel Profile</h1>
+            <h1 class="m-0">Data Karyawan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Profile</li>
+
+                <li class="breadcrumb-item"><a href="profile_create.php">Data Karyawan</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -23,11 +23,16 @@
       <section class="content">
        
         <div class="container-fluid">
-	  <a href="profile_create.php" class="btn btn-default">Tambah</a>
-	  <div class="card-body">
-	    <table class="table table-bordered">
-	      <thead>
-		<tr>
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <a href="profile_create.php" class="btn btn-block btn-primary"><i class="fas fa-plus"></i> Tambah</a></h3>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                	<thead>
+			<tr>
 		  <th>No</th>
 		  <th>NIP</th>
 		  <th>Nama</th>
@@ -43,7 +48,13 @@
 	      </thead>
 	      <tbody>
 		<?php 
-		  $query = $db->query("SELECT * FROM profile ");
+		  $query = $db->query("SELECT p.nip, p.nama, p.tanggal_lahir, j.jenis_kelamin, a.agama, pen.jenjang_pendidikan, g.golongan, jab.jabatan, p.alamat FROM profile AS p
+                      LEFT JOIN jenis_kelamin AS j ON p.id_jenis_kelamin = j.id
+                      LEFT JOIN agama AS a ON p.id_agama = a.id
+                      LEFT JOIN pendidikan AS pen ON p.id_pendidikan = pen.id
+                      LEFT JOIN golongan AS g ON p.id_golongan = g.id
+                      LEFT JOIN jabatan AS jab ON p.id_jabatan = jab.id
+		  	");
 		  $no = 1;
 		  while ($row = $query->fetch_assoc()) {
 		?>
@@ -59,10 +70,8 @@
 		    <td><?php echo $row['jabatan'] ?></td>
 		    <td><?php echo $row['alamat'] ?></td>
 		    <td>
-		      <a href="profile_update.php?id=<?php echo $row['id'] ?>" class="btn btn-default">Edit</a>
-		      <a href="profile_delete_save.php?id=<?php echo $row['id'] ?>" class="btn btn-default">Hapus</a>
-		    </td>
-		  </tr>
+		      <a href="profile_update.php?nip=<?php echo $row['nip'] ?>" class="btn btn-secondary btn-block">Edit</a>
+		      <a href="profile_delete.php?nip=<?php echo $row['nip'] ?>" onClick="return confirm('Apakah Anda benar-benar mau menghapusnya?')" class="btn btn-danger btn-block"><i class="fas fa-trash"></i> Hapus</a>
 		<?php
 		  $no++;
 		 } 

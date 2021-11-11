@@ -1,14 +1,25 @@
 <?php include('header.php') ?>
 <?php
-  $query_i = $db->query("SELECT l.id, l.nama_stasiun, l.alamat, l.telepon FROM lokasi AS l");
-  if(isset($_GET['kota']) && isset($_GET['kec']) && isset($_GET['subservis'])){
-    $query_m = $db->query("SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
+  
+if(isset($_GET['kota']) && isset($_GET['kec']) && isset($_GET['subservis'])){
+    $query_m = $db->query("
+      SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
       FROM lokasi AS l
       JOIN ikon ON l.id_ikon_marker = ikon.id
       JOIN kecamatan ON l.id_kecamatan = kecamatan.id
       JOIN kota ON kecamatan.id_kota = kota.id
       JOIN subservis ON l.id_subservis = subservis.id
-      WHERE kota.id = ".$_GET['kota']." AND kecamatan.id = ".$_GET['kec']." AND subservis.id = ".$_GET['subservis']." ");
+      WHERE kota.id = ".$_GET['kota']." AND kecamatan.id = ".$_GET['kec']." AND subservis.id = ".$_GET['subservis']." 
+      ");
+
+    $query_i = $db->query("
+      SELECT l.nama_stasiun, l.alamat, l.telepon
+      FROM lokasi AS l
+      JOIN kecamatan ON l.id_kecamatan = kecamatan.id
+      JOIN kota ON kecamatan.id_kota = kota.id
+      JOIN subservis ON l.id_subservis = subservis.id
+      WHERE kota.id = ".$_GET['kota']." AND kecamatan.id = ".$_GET['kec']." AND subservis.id = ".$_GET['subservis']." 
+      ");
   }elseif(isset($_GET['kota'])){
     $query_m = $db->query("SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
       FROM lokasi AS l
@@ -16,10 +27,40 @@
       JOIN kecamatan ON l.id_kecamatan = kecamatan.id
       JOIN kota ON kecamatan.id_kota = kota.id
       WHERE kota.id = ".$_GET['kota']."");
-  }else{  
+
+    $query_i = $db->query("
+      SELECT l.nama_stasiun, l.alamat, l.telepon
+      FROM lokasi AS l
+      JOIN kecamatan ON l.id_kecamatan = kecamatan.id
+      JOIN kota ON kecamatan.id_kota = kota.id
+      JOIN subservis ON l.id_subservis = subservis.id
+      WHERE kota.id = ".$_GET['kota']."  
+      ");
+  }elseif(isset($_GET['subservis'])){
     $query_m = $db->query("SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
       FROM lokasi AS l
-      JOIN ikon ON l.id_ikon_marker = ikon.id");
+      JOIN ikon ON l.id_ikon_marker = ikon.id
+      JOIN subservis ON l.id_subservis = subservis.id
+      WHERE subservis.id = ".$_GET['subservis']."");
+    $query_i = $db->query("
+      SELECT l.nama_stasiun, l.alamat, l.telepon
+      FROM lokasi AS l
+      JOIN kecamatan ON l.id_kecamatan = kecamatan.id
+      JOIN kota ON kecamatan.id_kota = kota.id
+      JOIN subservis ON l.id_subservis = subservis.id
+      WHERE subservis.id = ".$_GET['subservis']." 
+      ");
+  }else{  
+    $query_m = $db->query("
+      SELECT l.nama_stasiun, l.latitude, l.longitude, ikon.path 
+      FROM lokasi AS l
+      JOIN ikon ON l.id_ikon_marker = ikon.id
+      ");
+    $query_i = $db->query("
+      SELECT l.nama_stasiun, l.alamat, l.telepon
+      FROM lokasi AS l
+      
+      ");
   }
 ?>
   <div class="content-wrapper">
@@ -32,8 +73,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
             </ol>
           </div>
         </div>
@@ -86,6 +126,7 @@
                       <?php endif; ?>
                       </select>
                     </div>
+                    
                   </div>
                 </div>
               </div>
@@ -99,11 +140,11 @@
         
         <div class="row">
           <!-- Left col -->
-          <div class="col-md-12">
+          <div class="col-md-8">
             <!-- MAP & BOX PANE -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Peta Radio</h3>
+                <h3 class="card-title">Peta Stasiun Radio Di Kepulauan Riau</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -125,6 +166,19 @@
               </div>
             </div>
           </div>
+          <div class="col-md-4">
+              <!-- Info Boxes Style 2 -->
+              <div class="info-box mb-3 bg-info">
+                <span class="info-box-icon"><i class="fas fa-map-marker-alt"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Jumlah Stasiun Radio</span>
+                  <span class="info-box-number">
+                    <?php echo $query_m->num_rows ?>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
         </div>
 
       </div>
