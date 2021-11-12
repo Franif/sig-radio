@@ -1,4 +1,6 @@
-<?php include('user_read_header.php') ?>
+<?php include('loggedin.php') ?>
+<?php include('header.php') ?>
+<?php include('left_sidebar.php') ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -30,26 +32,22 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-	      <form method="POST" action="user_create_save.php">
+        <form method="POST" action="user_create_save.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nip">Username</label>
         <!-- <input type="text" id="nip" name="nip" class="form-control"> -->
-        
-                    <?php   
-                          $config = mysqli_connect("localhost","root","marblegrumble","fs_broadcast_stations");  
-                      ?>
                     <td><select name="nip" id="nip" class="form-control" onchange='changeValue(this.value)' required >
-                    <option value="" disabled selected hidden>---Pilih Username---</option>  
-                          <?php   
-                          $query = mysqli_query($config, "select nip, nama from profile order by nip ");  
-                          $result = mysqli_query($config, "select nip, nama from profile");  
-                          $a          = "var nama = new Array();\n;";    
-                          while ($row = mysqli_fetch_array($result)) {  
-                               echo '<option name="nip" value="'.$row['nip'] . '">' . $row['nip'] . '</option>';   
-                          $a .= "nama['" . $row['nip'] . "'] = {nama:'" . addslashes($row['nama'])."'};\n";  
-                          }  
-                          ?>  
+                    <option value="" disabled selected hidden>---Pilih Username---</option>
+                          <?php
+                          $query = $db->query("select nip, nama from profile order by nip ");
+                          $result = $db->query("select nip, nama from profile");
+                          $a          = "var nama = new Array();\n;";
+                          while ($row = $result->fetch_array()) {
+                               echo '<option name="nip" value="'.$row['nip'] . '">' . $row['nip'] . '</option>';
+                          $a .= "nama['" . $row['nip'] . "'] = {nama:'" . addslashes($row['nama'])."'};\n";
+                          }
+                          ?>
                      </select></td>
                   </div>
                   <div class="form-group">
@@ -99,7 +97,6 @@
     echo $a; ?>  
     function changeValue(nip){  
     document.getElementById('nama').value = nama[nip].nama;  
-                   
     };  
     </script> 
       <!-- /.content -->

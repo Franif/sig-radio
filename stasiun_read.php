@@ -1,4 +1,6 @@
-<?php include('stasiun_read_header.php') ?>
+<?php include('loggedin.php') ?>
+<?php include('header.php') ?>
+<?php include('left_sidebar.php') ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,7 +12,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Stasiun</a></li>
+              <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+              <li class="breadcrumb-item client">Stasiun</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,7 +29,13 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  <a href="stasiun_create.php" class="btn btn-block btn-primary"><i class="fas fa-plus"></i> Tambah</a></h3>
+                  Data Stasiun Broadcast
+                </h3>
+              <?php if($_SESSION['level'] == 1) : ?>
+                <div class="card-tools">
+                  <a href="stasiun_create.php" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Tambah</a>
+                </div>
+              <?php endif; ?>
               </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
@@ -44,8 +53,10 @@
                       <th>Frekuensi</th>
                       <th>Service</th>
                       <th>Sub Service</th>
-                      <th>Klien</th> 
+                      <th>Klien</th>
+                    <?php if($_SESSION['level'] == 1) : ?>
                       <th>Aksi</th>
+                    <?php endif; ?>
                     </tr>
                   </thead>
                   <tbody>
@@ -75,9 +86,13 @@
                       <td><?php echo $row['servis'] ?></td>
                       <td><?php echo $row['subservis'] ?></td>
                       <td><?php echo $row['nama_klien'] ?></td>
+                    <?php if($_SESSION['level'] == 1) : ?>
                       <td>
-                      <a href="stasiun_update.php?id_stasiun=<?php echo $row['id_stasiun'] ?>&&kota=<?php echo $row['id_kota']?>" class="btn btn-secondary btn-block">Edit</a>
-                      <a href="stasiun_delete.php?id_stasiun=<?php echo $row['id_stasiun'] ?>" onClick="return confirm('Apakah Anda benar-benar mau menghapusnya?')" class="btn btn-danger btn-block"><i class="fas fa-trash"></i> Hapus</a>
+                        <a href="stasiun_update.php?id_stasiun=<?php echo $row['id_stasiun'] ?>&&kota=<?php echo $row['id_kota']?>"
+                          class="btn btn-secondary btn-sm"><i class="fas fa-pen"></i>
+                        </a>
+                        <a href="stasiun_delete.php?id_stasiun=<?php echo $row['id_stasiun'] ?>" onClick="return confirm('Apakah Anda benar-benar mau menghapusnya?')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                      <?php endif; ?>
                       </td>
                     </tr>
                   <?php
@@ -94,5 +109,5 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-<?php include('stasiun_read_footer.php') ?>
+<?php include('footer.php') ?>
 

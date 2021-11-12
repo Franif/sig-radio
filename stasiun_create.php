@@ -1,4 +1,6 @@
-<?php include('stasiun_read_header.php') ?>
+<?php include('adminonly.php') ?>
+<?php include('header.php') ?>
+<?php include('left_sidebar.php') ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -10,19 +12,16 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="stasiun_read.php ?>">Stasiun</a></li>
+                <li class="breadcrumb-item"><a href="stasiun_read.php">Stasiun</a></li>
                 <li class="breadcrumb-item client">Tambah Stasiun</li>
-                
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-     
       <!-- Main content -->
       <section class="content">
-       
         <div class="container-fluid">
             <!-- general form elements -->
             <div class="card card-primary">
@@ -137,4 +136,4 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-<?php include('stasiun_read_footer.php') ?>
+<?php include('footer.php') ?>

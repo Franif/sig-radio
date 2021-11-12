@@ -1,4 +1,6 @@
-<?php include('rekap_header.php') ?>
+<?php include('loggedin.php') ?>
+<?php include('header.php') ?>
+<?php include('left_sidebar.php') ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -19,10 +21,8 @@
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-     
       <!-- Main content -->
       <section class="content">
-       
         <div class="container-fluid">
             <!-- general form elements -->
             <div class="card card-primary">
@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-	      <form method="POST" action="kelompok_create_save.php">
+        <form method="POST" action="kelompok_create_save.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="id">Id Rekap Tim</label>
@@ -132,15 +132,13 @@
   <script src="plugins/chart.js/Chart.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- <script type="text/javascript">   
-    <?php   
-    echo $a; ?>  
-    function changeValue(nip){  
-    document.getElementById('nama').value = nama[nip].nama;  
-                   
-    };  
+    <!-- <script type="text/javascript">
+    <?php
+    echo $a; ?>
+    function changeValue(nip){
+    document.getElementById('nama').value = nama[nip].nama;
+    };
     </script>  -->
-    
 <script type="text/javascript">
 
 $("#ketepatan").keyup(function(){

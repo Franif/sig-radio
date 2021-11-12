@@ -183,7 +183,6 @@
 <script src="plugins/jquery-validation/additional-methods.min.js"></script>
 <script>
   $(function () {
-    
     $('#form').validate({
       rules: {
         nip: {
@@ -192,7 +191,6 @@
           minlength: 16,
           maxlength: 16,
         },
-        
       },
       messages: {
         nip: {
@@ -200,7 +198,6 @@
           pattern: "Tolong masukkan hanya angka 0-9!"
           /* email: "Please enter a vaild email address" */
         },
-        
       },
       errorElement: 'span',
       errorPlacement: function (error, element) {

@@ -18,10 +18,8 @@
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-     
       <!-- Main content -->
       <section class="content">
-       
         <div class="container-fluid">
             <!-- general form elements -->
             <div class="card card-primary">
@@ -30,12 +28,11 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-	      <form id="form" method="POST" action="profile_create_save.php">
+        <form id="form" method="POST" action="profile_create_save.php">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nip">NIP</label>
         <input type="text" id="nip" name="nip" class="form-control" autofocus>
-        
                   </div>
                   <div class="form-group">
                     <label for="nama">Nama</label>
